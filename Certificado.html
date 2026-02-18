@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Certificado Oficial</title>
+
+<script defer src="js/app.js"></script>
+
+<style>
+body{
+  background:#0f172a;
+  font-family:Arial, Helvetica, sans-serif;
+  padding:30px;
+}
+
+.certificado{
+  background:white;
+  border:8px solid #38bdf8;
+  padding:50px;
+  max-width:900px;
+  margin:auto;
+  border-radius:16px;
+  text-align:center;
+  position:relative;
+}
+
+h1{
+  font-size:40px;
+  margin-bottom:10px;
+  color:#0ea5e9;
+}
+
+.sub{
+  font-size:18px;
+  margin-bottom:30px;
+}
+
+.nome{
+  font-size:32px;
+  font-weight:bold;
+  margin:25px 0;
+  color:#020617;
+}
+
+.info{
+  font-size:18px;
+  margin:8px 0;
+}
+
+.assinatura{
+  margin-top:60px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+
+.ass-box{
+  text-align:center;
+}
+
+.ass-linha{
+  width:260px;
+  border-top:2px solid #000;
+  margin-bottom:8px;
+}
+
+.numero{
+  position:absolute;
+  top:20px;
+  right:30px;
+  font-size:14px;
+  opacity:.7;
+}
+
+.qr{
+  margin-top:20px;
+}
+
+.btn{
+  margin-top:30px;
+  padding:14px 22px;
+  background:#38bdf8;
+  border:none;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:16px;
+}
+
+@media print{
+  body{background:white}
+  .btn{display:none}
+}
+</style>
+</head>
+
+<body>
+
+<div class="certificado">
+
+<div class="numero">
+Certificado Nº <span id="numCert"></span>
+</div>
+
+<h1>CERTIFICADO DE CONCLUSÃO</h1>
+
+<div class="sub">
+Curso Completo de Inglês Online
+</div>
+
+<p>Certificamos que</p>
+
+<div class="nome" id="nomeAluno">
+Aluno
+</div>
+
+<p class="info">
+Concluiu com sucesso o módulo
+<strong id="moduloNome"></strong>
+</p>
+
+<p class="info">
+Data: <span id="dataCert"></span>
+</p>
+
+<div class="qr">
+<img id="qrImg" width="120">
+</div>
+
+<div class="assinatura">
+
+<div class="ass-box">
+<div class="ass-linha"></div>
+Diretor Acadêmico
+</div>
+
+<div class="ass-box">
+<div class="ass-linha"></div>
+Coordenação Pedagógica
+</div>
+
+</div>
+
+<button id="btnPrint" class="btn">
+Imprimir Certificado
+</button>
+
+</div>
+
+<script>
+
+/* =========================
+   DADOS DO ALUNO
+========================= */
+
+const user = JSON.parse(localStorage.getItem("user"));
+if(user){
+ document.getElementById("nomeAluno").innerText = user.nome;
+}
+
+/* =========================
+   DATA
+========================= */
+
+document.getElementById("dataCert").innerText =
+ new Date().toLocaleDateString();
+
+
+/* =========================
+   MÓDULO
+========================= */
+
+const moduloAtual = localStorage.getItem("moduloAtual") || "Básico";
+document.getElementById("moduloNome").innerText =
+ moduloAtual.toUpperCase();
+
+
+/* =========================
+   NÚMERO ÚNICO
+========================= */
+
+function gerarNumero(){
+ return "ENG-" + Date.now().toString().slice(-8);
+}
+
+let num = localStorage.getItem("certNumero");
+if(!num){
+ num = gerarNumero();
+ localStorage.setItem("certNumero", num);
+}
+
+document.getElementById("numCert").innerText = num;
+
+
+/* =========================
+   QR CODE VALIDAÇÃO
+========================= */
+
+const textoQR = encodeURIComponent(
+ "Certificado "+num+" - "+(user?.nome || "Aluno")
+);
+
+document.getElementById("qrImg").src =
+ "https://api.qrserver.com/v1/create-qr-code/?size=120x120&data="+textoQR;
+
+
+/* =========================
+   BLOQUEIO SE NÃO CONCLUIR
+========================= */
+
+const progresso = JSON.parse(localStorage.getItem('progresso')) || {};
+const btn = document.getElementById("btnPrint");
+
+if(
+ !progresso[moduloAtual] ||
+ !cursosFinal ||
+ !cursosFinal[moduloAtual] ||
+ progresso[moduloAtual] < cursosFinal[moduloAtual].length
+){
+ btn.disabled = true;
+ btn.innerText = "Complete o módulo para imprimir";
+}
+else{
+ btn.onclick = () => window.print();
+}
+
+</script>
+
+</body>
+</html>
+
+

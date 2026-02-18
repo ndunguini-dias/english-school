@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel Administrativo</title>
+<link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<div class="layout">
+
+<!-- MENU -->
+<aside class="sidebar">
+  <h2>Admin</h2>
+  <button onclick="mostrarSecao('dashboard')">Dashboard</button>
+  <button onclick="mostrarSecao('cursos')">Cursos</button>
+  <button onclick="mostrarSecao('alunos')">Alunos</button>
+  <button onclick="mostrarSecao('professores')">Professores</button>
+</aside>
+
+<!-- CONTEÚDO -->
+<main class="content">
+
+<section id="dashboard" class="secao ativa">
+  <h1>Visão Geral</h1>
+  <div class="cards">
+    <div class="card"><h3 id="totalCursos">0</h3><p>Cursos</p></div>
+    <div class="card"><h3 id="totalAlunos">0</h3><p>Alunos</p></div>
+    <div class="card"><h3 id="totalProf">0</h3><p>Professores</p></div>
+  </div>
+</section>
+
+<section id="cursos" class="secao">
+  <h1>Cursos</h1>
+  <button onclick="abrirModalCurso()">+ Novo Curso</button>
+  <div id="listaCursos" class="grid"></div>
+</section>
+
+<section id="alunos" class="secao">
+  <h1>Alunos</h1>
+  <table id="tabelaAlunos"></table>
+</section>
+
+<section id="professores" class="secao">
+  <h1>Professores</h1>
+  <table id="tabelaProf"></table>
+</section>
+
+</main>
+</div>
+
+<!-- MODAL CURSO -->
+<div id="modalCurso" class="modal">
+  <div class="modal-box">
+    <h2>Novo Curso</h2>
+    <input id="cursoNome" placeholder="Nome do curso">
+    <input id="cursoAulas" placeholder="Quantidade de aulas">
+    <button onclick="salvarCurso()">Salvar</button>
+  </div>
+</div>
+
+<script src="admin.js"></script>
+</body>
+</html>
+

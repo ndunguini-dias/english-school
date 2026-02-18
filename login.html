@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acesso ao Sistema - English School</title>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="Login.css">
+
+</head>
+
+<body>
+<div class="wrapper">
+  <div class="card">
+
+    <!-- LOGIN -->
+    <div id="loginBox">
+      <h2>Entrar</h2>
+
+      <div class="input">
+        <i class="fa fa-user"></i>
+        <input id="loginUser" type="text" placeholder="Email ou telefone">
+      </div>
+
+      <div class="input">
+        <i class="fa fa-lock"></i>
+        <input id="loginSenha" type="password" placeholder="Senha">
+      </div>
+
+      <button class="btn" onclick="fazerLogin()">Entrar</button>
+      <div class="msg" id="loginMsg"></div>
+
+      <div class="switch">
+        Não tem conta? <a onclick="mostrarCadastro()">Criar cadastro</a>
+      </div>
+    </div>
+
+    <!-- CADASTRO -->
+    <div id="cadastroBox" class="hidden">
+      <h2>Criar Conta</h2>
+
+      <div class="input"><i class="fa fa-user"></i>
+        <input id="nome" placeholder="Nome próprio"></div>
+
+      <div class="input"><i class="fa fa-user-tag"></i>
+        <input id="apelido" placeholder="Apelido"></div>
+
+      <div class="input"><i class="fa fa-calendar"></i>
+        <input id="nascimento" type="date"></div>
+
+      <div class="input"><i class="fa fa-phone"></i>
+        <input id="telefone" placeholder="Telefone"></div>
+
+      <div class="input"><i class="fa fa-map-marker-alt"></i>
+        <input id="endereco" placeholder="Endereço"></div>
+
+      <div class="input"><i class="fa fa-lock"></i>
+        <input id="senhaCadastro" type="password" placeholder="Senha"></div>
+
+      <button class="btn" onclick="fazerCadastro()">Cadastrar</button>
+      <div class="msg" id="cadMsg"></div>
+
+      <div class="switch">
+        Já possui conta? <a onclick="mostrarLogin()">Fazer login</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// Alternar Login ↔ Cadastro
+function mostrarCadastro(){
+  document.getElementById('loginBox').classList.add('hidden');
+  document.getElementById('cadastroBox').classList.remove('hidden');
+}
+function mostrarLogin(){
+  document.getElementById('cadastroBox').classList.add('hidden');
+  document.getElementById('loginBox').classList.remove('hidden');
+}
+
+// Persistência local (sem backend)
+function saveUser(u){ localStorage.setItem('user', JSON.stringify(u)); }
+function getUser(){ return JSON.parse(localStorage.getItem('user')); }
+
+// Cadastro com validação básica
+function fazerCadastro(){
+  const payload = {
+    nome: nome.value.trim(),
+    apelido: apelido.value.trim(),
+    nascimento: nascimento.value,
+    telefone: telefone.value.trim(),
+    endereco: endereco.value.trim(),
+    senha: senhaCadastro.value
+  };
+
+  if(!payload.nome || !payload.apelido || !payload.nascimento || !payload.telefone || !payload.endereco || !payload.senha){
+    cadMsg.innerHTML = "Preencha todos os campos!";
+    return;
+  }
+
+let lista = JSON.parse(localStorage.getItem("listaAlunos")) || [];
+
+lista.push({
+ nome:nome.value,
+ telefone:telefone.value,
+ modulo:"basico",
+ progresso:0
+});
+
+localStorage.setItem("listaAlunos", JSON.stringify(lista));
+
+
+  saveUser(payload);
+  cadMsg.innerHTML = "Conta criada com sucesso!";
+  setTimeout(mostrarLogin, 1500);
+}
+
+// Login com validação básica
+function fazerLogin(){
+  const user = getUser();
+  if(!user){ loginMsg.innerHTML = "Cadastre-se primeiro!"; return; }
+
+  if(loginUser.value.trim() === user.nome || loginUser.value.trim() === user.telefone || loginUser.value.trim() === user.endereco){
+    if(loginSenha.value === user.senha){
+      loginMsg.innerHTML = "Login OK — redirecionando...";
+      setTimeout(()=>location.href="dashboard.html", 800);
+    } else loginMsg.innerHTML = "Senha incorreta!";
+  } else loginMsg.innerHTML = "Usuário não encontrado!";
+}
+</script>
+</body>
+</html>
+
+
+
+

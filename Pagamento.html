@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Pagamento</title>
+<link rel="stylesheet" href="pagamento.css">
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Pagamento do Curso</h2>
+
+<label>Curso</label>
+<select id="curso">
+<option value="Basico" data-valor="15000">Inglês Básico — 15.000 Kz</option>
+<option value="Intermedio" data-valor="22000">Intermédio — 22.000 Kz</option>
+<option value="Avancado" data-valor="30000">Avançado — 30.000 Kz</option>
+</select>
+
+<label>Método de Pagamento</label>
+<select id="metodo">
+<option>Cartão</option>
+<option>Multicaixa</option>
+<option>Transferência</option>
+</select>
+
+<label>Nome no pagamento</label>
+<input id="nome">
+
+<label>Número</label>
+<input id="numero">
+
+<label>Validade</label>
+<input id="validade">
+
+<label>CVV</label>
+<input id="cvv">
+
+<button onclick="pagar()">Pagar Agora</button>
+
+<div id="status"></div>
+
+</div>
+
+<script src="pagamento.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Painel de Cursos</title>
+<link rel="stylesheet" href="cursos.css">
+</head>
+
+<body>
+
+<header class="topo">
+  <h1>Painel de Cursos</h1>
+
+  <div class="top-actions">
+    <input type="text" id="pesquisa" placeholder="Pesquisar curso...">
+    <button onclick="abrirModal()">+ Novo Curso</button>
+  </div>
+</header>
+
+<!-- GRID CURSOS -->
+<section class="grid" id="gridCursos"></section>
+
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-box">
+
+    <h2 id="modalTitulo">Novo Curso</h2>
+
+    <input id="cursoNome" placeholder="Nome do curso">
+    
+    <select id="cursoNivel">
+      <option value="basico">Básico</option>
+      <option value="intermedio">Intermédio</option>
+      <option value="avancado">Avançado</option>
+    </select>
+
+    <textarea id="cursoDesc" placeholder="Descrição"></textarea>
+
+    <input type="file" id="cursoImg">
+
+    <select id="cursoStatus">
+      <option value="ativo">Ativo</option>
+      <option value="inativo">Inativo</option>
+    </select>
+
+    <div class="modal-btns">
+      <button onclick="salvarCurso()">Salvar</button>
+      <button class="cancel" onclick="fecharModal()">Cancelar</button>
+    </div>
+
+  </div>
+</div>
+
+<script src="cursos.js"></script>
+</body>
+</html>

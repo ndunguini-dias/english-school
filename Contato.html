@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Contato</title>
+
+<link rel="stylesheet" href="css/style.css">
+
+<style>
+
+.contato{
+  max-width:1100px;
+  margin:auto;
+  padding:40px 20px;
+}
+
+.contato-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+}
+
+.form-box{
+  background:#0f172a;
+  padding:30px;
+  border-radius:16px;
+}
+
+.form-box h2{
+  margin-bottom:20px;
+  color:#38bdf8;
+}
+
+.input{
+  margin-bottom:15px;
+}
+
+.input input,
+.input textarea{
+  width:100%;
+  padding:12px;
+  border-radius:8px;
+  border:none;
+  font-size:16px;
+}
+
+textarea{
+  min-height:120px;
+  resize:vertical;
+}
+
+.btn{
+  background:#38bdf8;
+  border:none;
+  padding:14px;
+  border-radius:10px;
+  font-weight:bold;
+  cursor:pointer;
+  width:100%;
+}
+
+.info-box{
+  background:#020617;
+  padding:30px;
+  border-radius:16px;
+}
+
+.info-item{
+  margin-bottom:18px;
+  font-size:18px;
+}
+
+.mapa{
+  margin-top:25px;
+  border-radius:14px;
+  overflow:hidden;
+}
+
+@media(max-width:768px){
+  .contato-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<section class="contato">
+
+<h1 class="titulo">Fale Conosco</h1>
+
+<div class="contato-grid">
+
+<!-- FORMULÁRIO -->
+
+<div class="form-box">
+
+<h2>Enviar Mensagem</h2>
+
+<div class="input">
+<input id="nome" placeholder="Seu nome">
+</div>
+
+<div class="input">
+<input id="email" placeholder="Seu email">
+</div>
+
+<div class="input">
+<input id="assunto" placeholder="Assunto">
+</div>
+
+<div class="input">
+<textarea id="mensagem" placeholder="Mensagem"></textarea>
+</div>
+
+<button class="btn" onclick="enviarContato()">
+Enviar Mensagem
+</button>
+
+<div id="msgStatus"></div>
+
+</div>
+
+<!-- INFORMAÇÕES -->
+
+<div class="info-box">
+
+<div class="info-item">
+📞 Telefone: +244 900 000 000
+</div>
+
+<div class="info-item">
+📧 Email: contato@englishschool.com
+</div>
+
+<div class="info-item">
+📍 Endereço: Luanda — Angola
+</div>
+
+<div class="info-item">
+⏰ Horário: Seg–Sex 8h–18h
+</div>
+
+<div class="mapa">
+
+<iframe
+width="100%"
+height="260"
+style="border:0"
+loading="lazy"
+allowfullscreen
+src="https://maps.google.com/maps?q=luanda&t=&z=13&ie=UTF8&iwloc=&output=embed">
+</iframe>
+
+</div>
+
+</div>
+
+</div>
+</section>
+
+<script>
+
+function enviarContato(){
+
+ const nome = document.getElementById("nome").value.trim();
+ const email = document.getElementById("email").value.trim();
+ const assunto = document.getElementById("assunto").value.trim();
+ const mensagem = document.getElementById("mensagem").value.trim();
+
+ if(!nome || !email || !mensagem){
+   msgStatus.innerHTML = "Preencha os campos obrigatórios";
+   return;
+ }
+
+ // salvar local (modo simples)
+ let contatos = JSON.parse(localStorage.getItem("contatos")) || [];
+
+ contatos.push({
+   nome,email,assunto,mensagem,
+   data:new Date().toLocaleString()
+ });
+
+ localStorage.setItem("contatos", JSON.stringify(contatos));
+
+ msgStatus.innerHTML = "Mensagem enviada com sucesso ✅";
+
+ document.querySelectorAll("input,textarea")
+ .forEach(e=>e.value="");
+}
+
+</script>
+<footer class="rodape">
+  © Plataforma de Ensino Online Teacher Ditunga  2026
+</footer>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel do Professor</title>
+<link rel="stylesheet" href="professor.css">
+</head>
+
+<body>
+
+<h1>Painel do Professor</h1>
+
+<!-- Alunos cadastrados -->
+<section class="alunos-section">
+  <h2>Alunos Cadastrados</h2>
+  <table id="tabelaAlunos">
+    <tr>
+      <th>Nome</th>
+      <th>Telefone</th>
+      <th>Módulo Atual</th>
+      <th>Progresso</th>
+    </tr>
+  </table>
+</section>
+
+<!-- Chat multimídia -->
+<section class="chat-professor">
+  <h2>Conversas</h2>
+
+  <div class="chat-box" id="chatBox">
+    <!-- Mensagens vão aparecer aqui -->
+  </div>
+
+  <div class="chat-input">
+    <input type="text" id="msgInput" placeholder="Digite uma mensagem...">
+
+    <label class="file-upload">
+      📎
+      <input type="file" id="fileInput">
+    </label>
+
+    <button onclick="enviarMensagem()">Enviar</button>
+  </div>
+</section>
+
+<script src="js/professor.js"></script>
+</body>
+</html>
+

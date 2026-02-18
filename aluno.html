@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Painel do Aluno</title>
+<link rel="stylesheet" href="aluno.css">
+</head>
+
+<body>
+
+<header>
+<h2>Área do Aluno</h2>
+<div id="nomeAluno"></div>
+</header>
+
+<div class="layout">
+
+<!-- MENU -->
+<aside>
+<button onclick="abrir('cursos')">Meus Cursos</button>
+<button onclick="abrir('prova')">Prova</button>
+<button onclick="abrir('chat')">Chat</button>
+<button onclick="abrir('certificado')">Certificado</button>
+</aside>
+
+<!-- CONTEÚDO -->
+<main>
+
+<section id="cursos" class="secao ativa">
+<h3>Cursos Inscritos</h3>
+<div id="listaCursos"></div>
+</section>
+
+<section id="aula" class="secao">
+<h3>Vídeo Aula</h3>
+<video id="videoAula" controls width="100%">
+<source src="videos/aula1.mp4" type="video/mp4">
+</video>
+<button onclick="marcarConcluida()">Marcar como concluída</button>
+</section>
+
+<section id="prova" class="secao">
+<h3>Prova Automática</h3>
+<div id="quiz"></div>
+<button onclick="corrigir()">Corrigir</button>
+<div id="resultado"></div>
+</section>
+
+<section id="chat" class="secao">
+<h3>Chat com Professor</h3>
+<div class="chatBox" id="chatBox"></div>
+<div class="chatInput">
+<input id="msg" placeholder="Mensagem">
+<button onclick="enviar()">Enviar</button>
+</div>
+</section>
+
+<section id="certificado" class="secao">
+<h3>Certificado</h3>
+<button id="btnCert" onclick="window.print()">Imprimir</button>
+</section>
+
+</main>
+</div>
+
+<script src="aluno.js"></script>
+</body>
+</html>
