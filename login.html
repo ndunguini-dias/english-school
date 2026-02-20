@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Acesso ao Sistema - English School</title>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<link rel="stylesheet" href="Login.css">
+<link rel="stylesheet" href="css/Login.css">
 
 </head>
 
@@ -124,7 +124,7 @@ function fazerLogin(){
   if(loginUser.value.trim() === user.nome || loginUser.value.trim() === user.telefone || loginUser.value.trim() === user.endereco){
     if(loginSenha.value === user.senha){
       loginMsg.innerHTML = "Login OK — redirecionando...";
-      setTimeout(()=>location.href="dashboard.html", 800);
+      setTimeout(()=>location.href="index.html", 800);
     } else loginMsg.innerHTML = "Senha incorreta!";
   } else loginMsg.innerHTML = "Usuário não encontrado!";
 }
